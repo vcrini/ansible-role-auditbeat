@@ -11,6 +11,11 @@ auditbeat.modules:
 - module: file_integrity
   paths:
     {{ auditbeat_module.file_integrity.paths | to_nice_yaml | trim | indent(4) }}
+  include_files:
+    {{ auditbeat_module.file_integrity.include_files | to_nice_yaml | trim | indent(4) }}
+  scan_at_start: {{ auditbeat_module.file_integrity.scan_at_start | bool }}
+  scan_rate_per_sec: {{ auditbeat_module.file_integrity.scan_rate_per_sec }}
+  max_file_size: {{ auditbeat_module.file_integrity.max_file_size }}
 {% endif %}
 {% if auditbeat_module.system.enabled | bool %}
 - module: system
